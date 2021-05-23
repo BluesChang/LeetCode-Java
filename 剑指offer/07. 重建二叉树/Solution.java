@@ -27,16 +27,16 @@ class Solution {
         return buildTree(0, 0, preorder.length - 1);
     }
 
-    public TreeNode buildTree(int preorder_index, int inorder_left, int inorder_right) {
-        if (inorder_left > inorder_right) {
+    public TreeNode buildTree(int root, int l, int r) {
+        if (l > r) {
             return null;
         }
 
-        TreeNode root = new TreeNode(preorder[preorder_index]);
-        int index = indexMap.get(preorder[preorder_index]);
+        TreeNode root = new TreeNode(preorder[root]);
+        int index = indexMap.get(preorder[root]);
 
-        root.left = buildTree(preorder_index + 1, inorder_left, index - 1);
-        root.right = buildTree(preorder_index + index - inorder_left + 1, index + 1, inorder_right);
+        root.left = buildTree(root + 1, l, index - 1);
+        root.right = buildTree(root + index - l + 1, index + 1, r);
         return root;
     }
 }
